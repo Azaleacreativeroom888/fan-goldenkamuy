@@ -4,88 +4,455 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | Golden Kamuy Fan Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=IM+Fell+English+SC&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --gold: #c9a227;
+      --gold-light: #e8c04a;
+      --gold-dim: #7a5f10;
+      --ink: #0e0c0a;
+      --blood: #6b1a1a;
+      --smoke: #2a2520;
+      --ash: #3e3830;
+      --mist: #8c8070;
+      --snow: #f5f0e8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: "Helvetica Neue", sans-serif;
-      background-color: #11114d;
-      color: #eee;
+      background-color: var(--ink);
+      color: var(--snow);
+      font-family: 'Noto Serif JP', 'Shippori Mincho', serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    header {
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #333;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
     }
 
-    nav a {
-      margin: 0 10px;
-      color: #aaa;
+    /* ── HEADER ── */
+    .site-header {
+      position: relative;
+      z-index: 10;
+      padding: 0;
+      border-bottom: 1px solid #1e1a16;
+    }
+
+    .header-band {
+      height: 4px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold) 0px,
+        var(--gold) 12px,
+        transparent 12px,
+        transparent 14px,
+        var(--blood) 14px,
+        var(--blood) 26px,
+        transparent 26px,
+        transparent 28px
+      );
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 30px;
+    }
+
+    .site-logo {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
       text-decoration: none;
-      font-size: 14px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .site-logo:hover { opacity: 1; }
+
+    nav { display: flex; gap: 6px; }
+    nav a {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      color: var(--mist);
+      text-decoration: none;
+      padding: 7px 16px;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--gold-light);
+      border-color: #2e2618;
     }
 
-    nav a:hover {
-      color: #fff;
+    /* ── PAGE TITLE ── */
+    .page-title-block {
+      position: relative;
+      z-index: 1;
+      padding: 70px 30px 50px;
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 30px;
     }
 
-    .container {
-      max-width: 700px;
-      margin: auto;
-      padding: 30px 20px;
-      line-height: 1.8;
-      color: #ddd;
+    .page-title-block h1 {
+      font-family: 'IM Fell English SC', serif;
+      font-size: clamp(52px, 10vw, 96px);
+      font-weight: 400;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px #2a2218;
+      letter-spacing: 0.05em;
+      user-select: none;
     }
 
-    h2 {
-      border-left: 4px solid #888;
-      padding-left: 10px;
+    .page-title-meta {
+      padding-bottom: 10px;
+    }
+    .page-title-meta p {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .page-title-meta h2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--snow);
+      letter-spacing: 0.1em;
     }
 
+    /* thin gold rule under title */
+    .page-title-rule {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+    .page-title-rule hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold-dim), transparent);
+    }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    .content-grid {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 30px 100px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 60px;
+    }
+
+    /* Left column — fixed labels */
+    .sidebar {
+      padding-top: 4px;
+    }
+
+    .sidebar-item {
+      margin-bottom: 60px;
+    }
+
+    .sidebar-num {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #2a2218;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-label {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold-dim);
+      letter-spacing: 0.15em;
+      display: block;
+    }
+
+    .sidebar-rule {
+      width: 24px;
+      height: 1px;
+      background: var(--gold-dim);
+      margin-top: 10px;
+      opacity: 0.4;
+    }
+
+    /* Right column — text content */
+    .prose-block {
+      padding-top: 0;
+    }
+
+    .prose-section {
+      margin-bottom: 64px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid #1a1712;
+    }
+    .prose-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .prose-section p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      line-height: 2.4;
+      color: #a09080;
+      margin-bottom: 20px;
+    }
+    .prose-section p:last-child { margin-bottom: 0; }
+
+    /* Small decorative mark between paragraphs */
+    .prose-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .prose-mark span {
+      font-size: 8px;
+      color: var(--gold-dim);
+    }
+    .prose-mark-line {
+      flex: 1;
+      height: 1px;
+      background: #1e1a16;
+      max-width: 60px;
+    }
+
+    /* Highlighted note block */
+    .note-block {
+      border-left: 2px solid var(--gold-dim);
+      padding: 20px 24px;
+      background: #12100d;
+      margin-top: 32px;
+    }
+    .note-block p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      line-height: 2.2;
+      color: #6e6050;
+      margin-bottom: 0;
+    }
+
+    /* Tag/badge */
+    .tag {
+      display: inline-block;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      color: var(--gold-dim);
+      border: 1px solid #2e2618;
+      padding: 4px 12px;
+      margin-right: 6px;
+      margin-bottom: 8px;
+    }
+
+    .tags-row {
+      margin-bottom: 24px;
+    }
+
+    /* Ainu ornament SVG inline */
+    .ornament {
+      display: block;
+      margin: 0 0 28px 0;
+      opacity: 0.3;
+    }
+
+    /* ── FOOTER ── */
     footer {
+      position: relative;
+      z-index: 1;
+      padding: 30px;
+      border-top: 1px solid #1e1a16;
       text-align: center;
-      padding: 20px;
-      border-top: 1px solid #333;
-      font-size: 12px;
-      color: #777;
+    }
+    .footer-mark {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      color: #3e3428;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: #2a2218;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .page-title-block { animation: fade-up 0.7s ease both; }
+    .content-grid { animation: fade-up 0.7s 0.2s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 40px 24px 80px;
+      }
+      .sidebar {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+      .sidebar-item { margin-bottom: 0; }
+      .sidebar-rule { display: none; }
+      .header-inner { padding: 16px 20px; }
+      .page-title-block { padding: 50px 20px 30px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .page-title-rule { padding: 0 20px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>ABOUT</h1>
-    <nav>
-      <a href="index.html">HOME</a>
-      <a href="blog.html">BLOG</a>
-      <a href="gallery.html">GALLERY</a>
-    </nav>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">Golden Kamuy Fan Log</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+    </div>
   </header>
 
-  <div class="container">
-    <h2>このサイトについて</h2>
-    <p>
-      このサイトは『ゴールデンカムイ』が好きすぎて、
-      好きなシーンや感情を自由に語るために作りました。
-    </p>
-
-    <p>
-      解釈を押し付けるというより、
-      「なんか分からないけど好き」を大事にしています。
-    </p>
-
-    <h2>管理人について</h2>
-    <p>
-      イラストを描きながら、気になったことをゆるく言語化しています。
-    </p>
-
-    <p>
-      更新は気まぐれですが、続けることを目標にしています。
-    </p>
+  <!-- PAGE TITLE -->
+  <div class="page-title-block">
+    <h1>About</h1>
+    <div class="page-title-meta">
+      <p>Page — 03</p>
+      <h2>このサイトについて</h2>
+    </div>
   </div>
+  <div class="page-title-rule"><hr></div>
+
+  <main>
+    <div class="content-grid">
+
+      <!-- SIDEBAR LABELS -->
+      <aside class="sidebar">
+        <div class="sidebar-item">
+          <span class="sidebar-num">01</span>
+          <span class="sidebar-label">Site</span>
+          <div class="sidebar-rule"></div>
+        </div>
+        <div class="sidebar-item">
+          <span class="sidebar-num">02</span>
+          <span class="sidebar-label">Admin</span>
+          <div class="sidebar-rule"></div>
+        </div>
+      </aside>
+
+      <!-- PROSE CONTENT -->
+      <div class="prose-block">
+
+        <!-- Section 01 -->
+        <div class="prose-section">
+
+          <svg class="ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="8" x2="40" y2="8" stroke="#7a5f10" stroke-width="0.5"/>
+            <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
+          </svg>
+
+          <div class="tags-row">
+            <span class="tag">Fan Site</span>
+            <span class="tag">Non-official</span>
+          </div>
+
+          <p>
+            このサイトは『ゴールデンカムイ』が好きすぎて、好きなシーンや感情を自由に語るために作りました。
+          </p>
+
+          <div class="prose-mark">
+            <div class="prose-mark-line"></div>
+            <span>◆</span>
+            <div class="prose-mark-line"></div>
+          </div>
+
+          <p>
+            解釈を押し付けるというより、「なんか分からないけど好き」を大事にしています。正しい読み方なんてないと思っていて、ただ自分がその作品に感じたことを、どこかに残しておきたいという気持ちだけです。
+          </p>
+
+          <div class="note-block">
+            <p>
+              二次創作・非公式サイトです。作品・キャラクターに関する権利はすべて原作者および出版社に帰属します。
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 02 -->
+        <div class="prose-section">
+
+          <svg class="ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="8" x2="40" y2="8" stroke="#7a5f10" stroke-width="0.5"/>
+            <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
+          </svg>
+
+          <div class="tags-row">
+            <span class="tag">Illustrator</span>
+            <span class="tag">Hobbyist</span>
+          </div>
+
+          <p>
+            イラストを描きながら、気になったことをゆるく言語化しています。
+          </p>
+
+          <div class="prose-mark">
+            <div class="prose-mark-line"></div>
+            <span>◆</span>
+            <div class="prose-mark-line"></div>
+          </div>
+
+          <p>
+            更新は気まぐれですが、続けることを目標にしています。書けるときに書いて、描けるときに描く——そのくらいのペースで長く続けていけたらと思っています。
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
 
   <footer>
-    <p>© Fan Log</p>
+    <span class="footer-mark">Golden Kamuy Fan Log</span>
+    <p class="footer-copy">© Fan Log — 二次創作・非公式サイト</p>
   </footer>
 
 </body>
