@@ -4,130 +4,370 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog | Golden Kamuy Fan Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=IM+Fell+English+SC&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --gold: #c9a227;
+      --gold-light: #e8c04a;
+      --gold-dim: #7a5f10;
+      --ink: #0e0c0a;
+      --blood: #6b1a1a;
+      --ash: #3e3830;
+      --mist: #8c8070;
+      --snow: #f5f0e8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: "Helvetica Neue", sans-serif;
-      background-color: #11114d;
-      color: #eee;
+      background-color: var(--ink);
+      color: var(--snow);
+      font-family: 'Noto Serif JP', 'Shippori Mincho', serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    header {
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #333;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 26px;
-      letter-spacing: 2px;
+    /* ── HEADER ── */
+    .site-header {
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid #1e1a16;
     }
 
-    nav {
-      margin-top: 10px;
+    .header-band {
+      height: 4px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold) 0px, var(--gold) 12px,
+        transparent 12px, transparent 14px,
+        var(--blood) 14px, var(--blood) 26px,
+        transparent 26px, transparent 28px
+      );
     }
 
-    nav a {
-      margin: 0 10px;
-      color: #aaa;
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 30px;
+    }
+
+    .site-logo {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
       text-decoration: none;
-      font-size: 14px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .site-logo:hover { opacity: 1; }
+
+    nav { display: flex; gap: 6px; }
+    nav a {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      color: var(--mist);
+      text-decoration: none;
+      padding: 7px 16px;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--gold-light);
+      border-color: #2e2618;
     }
 
-    nav a:hover {
-      color: #fff;
+    /* ── PAGE TITLE ── */
+    .page-title-block {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 70px 30px 50px;
+      display: flex;
+      align-items: flex-end;
+      gap: 30px;
     }
 
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
+    .page-title-block h1 {
+      font-family: 'IM Fell English SC', serif;
+      font-size: clamp(52px, 10vw, 96px);
+      font-weight: 400;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px #2a2218;
+      letter-spacing: 0.05em;
+      user-select: none;
     }
 
+    .page-title-meta { padding-bottom: 10px; }
+    .page-title-meta p {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .page-title-meta h2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--snow);
+      letter-spacing: 0.1em;
+    }
+
+    .page-title-rule {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+    .page-title-rule hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold-dim), transparent);
+    }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    .posts-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 70px 30px 100px;
+    }
+
+    /* ── SINGLE POST ── */
     .post {
-      margin-bottom: 50px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #333;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 48px;
+      margin-bottom: 0;
+      padding: 56px 0;
+      border-bottom: 1px solid #1a1712;
+      animation: fade-up 0.6s ease both;
+    }
+    .post:first-child { padding-top: 0; }
+    .post:last-child { border-bottom: none; }
+    .post:nth-child(2) { animation-delay: 0.15s; }
+
+    /* Left — date column */
+    .post-date-col {
+      padding-top: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
     }
 
-    .post h2 {
-      margin-bottom: 5px;
-      font-size: 22px;
+    .post-date {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #3e3428;
+      line-height: 1.6;
     }
 
-    .date {
-      font-size: 12px;
-      color: #777;
-      margin-bottom: 15px;
+    .post-index {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 32px;
+      color: #1e1a16;
+      line-height: 1;
     }
 
-    .content {
-      line-height: 1.8;
-      color: #ddd;
+    .post-tag {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      color: var(--gold-dim);
+      border: 1px solid #2a2218;
+      padding: 3px 10px;
     }
 
-    .content p {
-      margin-bottom: 15px;
+    /* Right — content column */
+    .post-content-col { }
+
+    .post-ornament {
+      display: block;
+      margin-bottom: 20px;
+      opacity: 0.25;
     }
 
+    .post-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(19px, 3vw, 24px);
+      font-weight: 600;
+      color: var(--snow);
+      line-height: 1.5;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      transition: color 0.3s;
+    }
+
+    .post-body p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      line-height: 2.5;
+      color: #8c7c68;
+      margin-bottom: 20px;
+    }
+    .post-body p:last-child { margin-bottom: 0; }
+
+    /* Inline pull-quote — first sentence emphasis */
+    .post-body p:first-child {
+      font-size: 16px;
+      color: #a09080;
+    }
+
+
+
+    /* ── FOOTER ── */
     footer {
+      position: relative;
+      z-index: 1;
+      padding: 30px;
+      border-top: 1px solid #1e1a16;
       text-align: center;
-      padding: 20px;
-      border-top: 1px solid #333;
-      font-size: 12px;
-      color: #777;
+    }
+    .footer-mark {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      color: #3e3428;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .footer-copy { font-size: 11px; color: #2a2218; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .page-title-block { animation: fade-up 0.7s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .post {
+        grid-template-columns: 1fr;
+        gap: 20px 0;
+      }
+      .post-date-col {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+      }
+      .post-index { font-size: 20px; }
+      .header-inner { padding: 16px 20px; }
+      .page-title-block { padding: 50px 20px 30px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .posts-wrap { padding: 50px 20px 80px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>BLOG</h1>
-    <nav>
-      <a href="index.html">HOME</a>
-      <a href="gallery.html">GALLERY</a>
-      <a href="about.html">ABOUT</a>
-    </nav>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">Golden Kamuy Fan Log</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
   </header>
 
-  <div class="container">
-
-    <!-- 記事① -->
-    <div class="post">
-      <h2>第○話のこのシーンが好きすぎる</h2>
-      <div class="date">2026.04.21</div>
-      <div class="content">
-        <p>
-          このシーン、正直うまく言葉にできないんだけど、
-          なんか妙に引っかかるんだよね。
-        </p>
-        <p>
-          理由は分からないけど、何回も見返してしまう。
-          こういう感覚があるから、この作品好きなんだと思う。
-        </p>
-      </div>
+  <!-- PAGE TITLE -->
+  <div class="page-title-block">
+    <h1>Blog</h1>
+    <div class="page-title-meta">
+      <p>Page — 02</p>
+      <h2>感情の記録</h2>
     </div>
-
-    <!-- 記事② -->
-    <div class="post">
-      <h2>尾形のこの表情なんなんだろう</h2>
-      <div class="date">2026.04.20</div>
-      <div class="content">
-        <p>
-          この表情、意味を考えようとすると分からなくなる。
-        </p>
-        <p>
-          でも、分からないままでもいい気がする。
-          むしろその曖昧さが魅力なのかもしれない。
-        </p>
-      </div>
-    </div>
-
   </div>
+  <div class="page-title-rule"><hr></div>
+
+  <main>
+    <div class="posts-wrap">
+
+      <!-- POST 01 -->
+      <article class="post">
+        <div class="post-date-col">
+          <span class="post-index">01</span>
+          <span class="post-date">2026<br>04.21</span>
+          <span class="post-tag">感想</span>
+        </div>
+        <div class="post-content-col">
+          <svg class="post-ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="8" x2="40" y2="8" stroke="#7a5f10" stroke-width="0.5"/>
+            <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
+          </svg>
+          <h2 class="post-title">第○話のこのシーンが好きすぎる</h2>
+          <div class="post-body">
+            <p>
+              このシーン、正直うまく言葉にできないんだけど、なんか妙に引っかかるんだよね。
+            </p>
+            <p>
+              理由は分からないけど、何回も見返してしまう。こういう感覚があるから、この作品好きなんだと思う。
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 02 -->
+      <article class="post">
+        <div class="post-date-col">
+          <span class="post-index">02</span>
+          <span class="post-date">2026<br>04.20</span>
+          <span class="post-tag">キャラ考察</span>
+        </div>
+        <div class="post-content-col">
+          <svg class="post-ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="8" x2="40" y2="8" stroke="#7a5f10" stroke-width="0.5"/>
+            <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
+          </svg>
+          <h2 class="post-title">尾形のこの表情なんなんだろう</h2>
+          <div class="post-body">
+            <p>
+              この表情、意味を考えようとすると分からなくなる。
+            </p>
+            <p>
+              でも、分からないままでもいい気がする。むしろその曖昧さが魅力なのかもしれない。
+            </p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
 
   <footer>
-    <p>© Fan Log</p>
+    <span class="footer-mark">Golden Kamuy Fan Log</span>
+    <p class="footer-copy">© Fan Log — 二次創作・非公式サイト</p>
   </footer>
 
 </body>
