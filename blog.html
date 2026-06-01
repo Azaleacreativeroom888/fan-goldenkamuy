@@ -12,18 +12,18 @@
       --gold: #c9a227;
       --gold-light: #e8c04a;
       --gold-dim: #7a5f10;
-      --ink: #0e0c0a;
-      --blood: #6b1a1a;
-      --ash: #3e3830;
-      --mist: #8c8070;
-      --snow: #f5f0e8;
+      --ink: #111d2b;
+      --blood: #1a3a5c;
+      --ash: #1e3448;
+      --mist: #7a9db8;
+      --snow: #e8f0f8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      background-color: #1A3A5C;
+      background-color: var(--ink);
       color: var(--snow);
       font-family: 'Noto Serif JP', 'Shippori Mincho', serif;
       overflow-x: hidden;
@@ -45,7 +45,7 @@
     .site-header {
       position: relative;
       z-index: 10;
-      border-bottom: 1px solid #1e1a16;
+      border-bottom: 1px solid #1e3045;
     }
 
     .header-band {
@@ -92,7 +92,7 @@
     }
     nav a:hover, nav a.active {
       color: var(--gold-light);
-      border-color: #2e2618;
+      border-color: #1e3a55;
     }
 
     /* ── PAGE TITLE ── */
@@ -113,7 +113,7 @@
       font-weight: 400;
       line-height: 1;
       color: transparent;
-      -webkit-text-stroke: 1px #2a2218;
+      -webkit-text-stroke: 1px #1e3550;
       letter-spacing: 0.05em;
       user-select: none;
     }
@@ -165,7 +165,7 @@
       gap: 0 48px;
       margin-bottom: 0;
       padding: 56px 0;
-      border-bottom: 1px solid #1a1712;
+      border-bottom: 1px solid #1a2e42;
       animation: fade-up 0.6s ease both;
     }
     .post:first-child { padding-top: 0; }
@@ -185,14 +185,14 @@
       font-family: 'IM Fell English SC', serif;
       font-size: 11px;
       letter-spacing: 0.2em;
-      color: #3e3428;
+      color: #284a66;
       line-height: 1.6;
     }
 
     .post-index {
       font-family: 'IM Fell English SC', serif;
       font-size: 32px;
-      color: #1e1a16;
+      color: #1e3045;
       line-height: 1;
     }
 
@@ -201,7 +201,7 @@
       font-size: 8px;
       letter-spacing: 0.3em;
       color: var(--gold-dim);
-      border: 1px solid #2a2218;
+      border: 1px solid #1e3550;
       padding: 3px 10px;
     }
 
@@ -229,7 +229,7 @@
       font-family: 'Noto Serif JP', serif;
       font-size: 15px;
       line-height: 2.5;
-      color: #8c7c68;
+      color: #7a9db8;
       margin-bottom: 20px;
     }
     .post-body p:last-child { margin-bottom: 0; }
@@ -237,7 +237,7 @@
     /* Inline pull-quote — first sentence emphasis */
     .post-body p:first-child {
       font-size: 16px;
-      color: #a09080;
+      color: #8ab0cc;
     }
 
 
@@ -247,18 +247,18 @@
       position: relative;
       z-index: 1;
       padding: 30px;
-      border-top: 1px solid #1e1a16;
+      border-top: 1px solid #1e3045;
       text-align: center;
     }
     .footer-mark {
       font-family: 'IM Fell English SC', serif;
       font-size: 9px;
       letter-spacing: 0.5em;
-      color: #3e3428;
+      color: #284a66;
       display: block;
       margin-bottom: 6px;
     }
-    .footer-copy { font-size: 11px; color: #2a2218; }
+    .footer-copy { font-size: 11px; color: #1e3550; }
 
     /* ── ANIMATIONS ── */
     @keyframes fade-up {
@@ -314,31 +314,6 @@
   <main>
     <div class="posts-wrap">
 
-      <article class="post">
-        <div class="post-date-col">
-          <span class="post-index">01</span>
-          <span class="post-date">2026<br>05.22</span>
-          <span class="post-tag">感想</span>
-        </div>
-        <div class="post-content-col">
-          <svg class="post-ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="8" x2="40" y2="8" stroke="#7a5f10" stroke-width="0.5"/>
-            <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
-          </svg>
-          <h2 class="post-title">アニメシリーズを見れない……</h2>
-          <div class="post-body">
-            <p>
-              終わるのが悲しすぎて最後のテレビシリーズをなかなか見れない……
-              好きなのに観たら終わってしまう……
-            </p>
-            <p>
-              まじで延々とゴールデンカムイは続いて欲しかった。
-              でも、今期で本当に終わるんだな……
-            </p>
-          </div>
-        </div>
-      </article>
-
       <!-- POST 01 -->
       <article class="post">
         <div class="post-date-col">
@@ -348,7 +323,7 @@
         </div>
         <div class="post-content-col">
           <svg class="post-ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="8" x2="40" y2="8" stroke="#7a5f10" stroke-width="0.5"/>
+            <line x1="0" y1="8" x2="40" y2="8" stroke="#c9a227" stroke-width="0.5"/>
             <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
           </svg>
           <h2 class="post-title">第○話のこのシーンが好きすぎる</h2>
@@ -372,7 +347,7 @@
         </div>
         <div class="post-content-col">
           <svg class="post-ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="8" x2="40" y2="8" stroke="#7a5f10" stroke-width="0.5"/>
+            <line x1="0" y1="8" x2="40" y2="8" stroke="#c9a227" stroke-width="0.5"/>
             <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
           </svg>
           <h2 class="post-title">尾形のこの表情なんなんだろう</h2>
