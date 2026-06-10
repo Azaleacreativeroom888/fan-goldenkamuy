@@ -6,7 +6,7 @@
   <title>Blog | Golden Kamuy Fan Log</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=IM+Fell+English+SC&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&family=IM+Fell+English+SC&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
       --gold: #c9a227;
@@ -14,7 +14,6 @@
       --gold-dim: #7a5f10;
       --ink: #111d2b;
       --blood: #1a3a5c;
-      --ash: #1e3448;
       --mist: #7a9db8;
       --snow: #e8f0f8;
     }
@@ -25,8 +24,7 @@
     body {
       background-color: var(--ink);
       color: var(--snow);
-      font-family: 'Noto Serif JP', 'Shippori Mincho', serif;
-      overflow-x: hidden;
+      font-family: 'Noto Serif JP', serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -47,7 +45,6 @@
       z-index: 10;
       border-bottom: 1px solid #1e3045;
     }
-
     .header-band {
       height: 4px;
       background: repeating-linear-gradient(
@@ -58,195 +55,124 @@
         transparent 26px, transparent 28px
       );
     }
-
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 860px;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 20px 30px;
+      padding: 18px 24px;
     }
-
     .site-logo {
       font-family: 'IM Fell English SC', serif;
       font-size: 13px;
       letter-spacing: 0.3em;
       color: var(--gold);
       text-decoration: none;
-      opacity: 0.8;
+      opacity: 0.85;
       transition: opacity 0.3s;
     }
     .site-logo:hover { opacity: 1; }
-
-    nav { display: flex; gap: 6px; }
+    nav { display: flex; gap: 4px; }
     nav a {
       font-family: 'IM Fell English SC', serif;
       font-size: 10px;
-      letter-spacing: 0.35em;
+      letter-spacing: 0.3em;
       color: var(--mist);
       text-decoration: none;
-      padding: 7px 16px;
+      padding: 6px 14px;
       border: 1px solid transparent;
       transition: all 0.3s;
     }
     nav a:hover, nav a.active {
       color: var(--gold-light);
-      border-color: #1e3a55;
+      border-color: #284a66;
     }
 
-    /* ── PAGE TITLE ── */
-    .page-title-block {
-      position: relative;
-      z-index: 1;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 70px 30px 50px;
-      display: flex;
-      align-items: flex-end;
-      gap: 30px;
-    }
-
-    .page-title-block h1 {
-      font-family: 'IM Fell English SC', serif;
-      font-size: clamp(52px, 10vw, 96px);
-      font-weight: 400;
-      line-height: 1;
-      color: transparent;
-      -webkit-text-stroke: 1px #1e3550;
-      letter-spacing: 0.05em;
-      user-select: none;
-    }
-
-    .page-title-meta { padding-bottom: 10px; }
-    .page-title-meta p {
-      font-family: 'IM Fell English SC', serif;
-      font-size: 10px;
-      letter-spacing: 0.4em;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-    .page-title-meta h2 {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--snow);
-      letter-spacing: 0.1em;
-    }
-
-    .page-title-rule {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 30px;
-    }
-    .page-title-rule hr {
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, var(--gold-dim), transparent);
-    }
-
-    /* ── MAIN ── */
+    /* ── FEED ── */
     main {
       position: relative;
       z-index: 1;
       flex: 1;
     }
 
-    .posts-wrap {
-      max-width: 860px;
+    .feed {
+      max-width: 640px;
       margin: 0 auto;
-      padding: 70px 30px 100px;
+      padding: 32px 24px 80px;
     }
 
-    /* ── SINGLE POST ── */
+    /* ── POST ── */
     .post {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 0 48px;
-      margin-bottom: 0;
-      padding: 56px 0;
-      border-bottom: 1px solid #1a2e42;
-      animation: fade-up 0.6s ease both;
-    }
-    .post:first-child { padding-top: 0; }
-    .post:last-child { border-bottom: none; }
-    .post:nth-child(2) { animation-delay: 0.15s; }
-
-    /* Left — date column */
-    .post-date-col {
-      padding-top: 6px;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
       gap: 14px;
+      padding: 18px 0;
+      border-bottom: 1px solid #1a2e42;
+    }
+    .post:last-child { border-bottom: none; }
+
+    /* date stamp — left column */
+    .post-date {
+      flex-shrink: 0;
+      width: 52px;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: #284a66;
+      line-height: 1.7;
+      padding-top: 2px;
+      text-align: right;
     }
 
-    .post-date {
-      font-family: 'IM Fell English SC', serif;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      color: #284a66;
+    /* thin gold rule between date and body */
+    .post-divider {
+      flex-shrink: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+      margin: 2px 0 0;
+      min-height: 100%;
+    }
+
+    /* right column */
+    .post-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .post-body p {
+      font-size: 14px;
+      line-height: 2;
+      color: #9ab8d0;
+      word-break: break-word;
+    }
+
+    /* optional title */
+    .post-body .post-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--snow);
+      margin-bottom: 8px;
       line-height: 1.6;
     }
 
-    .post-index {
-      font-family: 'IM Fell English SC', serif;
-      font-size: 32px;
-      color: #1e3045;
-      line-height: 1;
-    }
-
+    /* optional tag */
     .post-tag {
+      display: inline-block;
+      margin-top: 10px;
       font-family: 'IM Fell English SC', serif;
       font-size: 8px;
       letter-spacing: 0.3em;
       color: var(--gold-dim);
       border: 1px solid #1e3550;
-      padding: 3px 10px;
+      padding: 2px 8px;
     }
-
-    /* Right — content column */
-    .post-content-col { }
-
-    .post-ornament {
-      display: block;
-      margin-bottom: 20px;
-      opacity: 0.25;
-    }
-
-    .post-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: clamp(19px, 3vw, 24px);
-      font-weight: 600;
-      color: var(--snow);
-      line-height: 1.5;
-      letter-spacing: 0.05em;
-      margin-bottom: 24px;
-      transition: color 0.3s;
-    }
-
-    .post-body p {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 15px;
-      line-height: 2.5;
-      color: #7a9db8;
-      margin-bottom: 20px;
-    }
-    .post-body p:last-child { margin-bottom: 0; }
-
-    /* Inline pull-quote — first sentence emphasis */
-    .post-body p:first-child {
-      font-size: 16px;
-      color: #8ab0cc;
-    }
-
-
 
     /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 1;
-      padding: 30px;
+      padding: 24px;
       border-top: 1px solid #1e3045;
       text-align: center;
     }
@@ -256,38 +182,18 @@
       letter-spacing: 0.5em;
       color: #284a66;
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .footer-copy { font-size: 11px; color: #1e3550; }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .page-title-block { animation: fade-up 0.7s ease both; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      .post {
-        grid-template-columns: 1fr;
-        gap: 20px 0;
-      }
-      .post-date-col {
-        flex-direction: row;
-        align-items: center;
-        gap: 16px;
-      }
-      .post-index { font-size: 20px; }
-      .header-inner { padding: 16px 20px; }
-      .page-title-block { padding: 50px 20px 30px; flex-direction: column; align-items: flex-start; gap: 16px; }
-      .posts-wrap { padding: 50px 20px 80px; }
+    @media (max-width: 480px) {
+      .post-date { width: 40px; font-size: 9px; }
+      .feed { padding: 24px 16px 60px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="site-header">
     <div class="header-band"></div>
     <div class="header-inner">
@@ -301,79 +207,34 @@
     </div>
   </header>
 
-  <!-- PAGE TITLE -->
-  <div class="page-title-block">
-    <h1>Blog</h1>
-    <div class="page-title-meta">
-      <p>Page — 02</p>
-      <h2>感情の記録</h2>
-    </div>
-  </div>
-  <div class="page-title-rule"><hr></div>
-
   <main>
-    <div class="posts-wrap">
+    <div class="feed">
 
-      <article class="post">
-        <div class="post-date-col">
-          <span class="post-date">2026<br>06.09</span>
+      <div class="post">
+        <div class="post-date">2026<br>06.09</div>
+        <div class="post-divider"></div>
+        <div class="post-body">
+          <p>「ヒグマは巣穴に入った人間を殺さない」って本当なのかな？でもそれを本当に実行できるのは杉本が不死身って設定だからだよな。それを実行したいとは思わないけどおとぎ話としては面白い。</p>
         </div>
-        <div class="post-content-col">
-          <svg class="post-ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="8" x2="40" y2="8" stroke="#c9a227" stroke-width="0.5"/>
-            <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
-          </svg>
-          <div class="post-body">
-            <p>
-              「ヒグマは巣穴に入った人間を殺さない」って本当なのかな？
-              でもそれを本当に実行できるのは杉本が不死身って設定だからだよな。
-              それを実行したいとは思わないけどおとぎ話としては面白い。
-            </p>
-          </div>
-        </div>
-      </article>
+      </div>
 
-      <!-- POST 01 -->
-      <article class="post">
-        <div class="post-date-col">
-          <span class="post-date">2026<br>04.21</span>
+      <div class="post">
+        <div class="post-date">2026<br>04.21</div>
+        <div class="post-divider"></div>
+        <div class="post-body">
+          <p>「不死身の杉本は手に負えん。片手だけに」が好き。この構文使ってしまいそう。</p>
         </div>
-        <div class="post-content-col">
-          <svg class="post-ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="8" x2="40" y2="8" stroke="#c9a227" stroke-width="0.5"/>
-            <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
-          </svg>
-          <div class="post-body">
-            <p>
-              「不死身の杉本は手に負えん。片手だけに」が好き。この構文使ってしまいそう。
-            </p>
-          </div>
-        </div>
-      </article>
+      </div>
 
-      <!-- POST 02 -->
-      <article class="post">
-        <div class="post-date-col">
-          <span class="post-index">02</span>
-          <span class="post-date">2026<br>04.20</span>
+      <div class="post">
+        <div class="post-date">2026<br>04.20</div>
+        <div class="post-divider"></div>
+        <div class="post-body">
+          <div class="post-title">尾形のこの表情なんなんだろう</div>
+          <p>この表情、意味を考えようとすると分からなくなる。でも、分からないままでもいい気がする。むしろその曖昧さが魅力なのかもしれない。</p>
           <span class="post-tag">キャラ考察</span>
         </div>
-        <div class="post-content-col">
-          <svg class="post-ornament" width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="8" x2="40" y2="8" stroke="#c9a227" stroke-width="0.5"/>
-            <polygon points="20,2 24,8 20,14 16,8" fill="none" stroke="#c9a227" stroke-width="0.8"/>
-          </svg>
-          <h2 class="post-title">尾形のこの表情なんなんだろう</h2>
-          <div class="post-body">
-            <p>
-              この表情、意味を考えようとすると分からなくなる。
-            </p>
-            <p>
-              でも、分からないままでもいい気がする。むしろその曖昧さが魅力なのかもしれない。
-            </p>
-          </div>
-        </div>
-      </article>
+      </div>
 
     </div>
   </main>
