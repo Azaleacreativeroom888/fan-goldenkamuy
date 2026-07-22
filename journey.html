@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聖地巡礼 函館 | Golden Kamuy Fan Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=IM+Fell+English+SC&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a227;
+      --gold-light: #e8c04a;
+      --gold-dim: #7a5f10;
+      --ink: #111d2b;
+      --blood: #1a3a5c;
+      --mist: #7a9db8;
+      --snow: #e8f0f8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--ink);
+      color: var(--snow);
+      font-family: 'Noto Serif JP', 'Shippori Mincho', serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    .site-header { position: relative; z-index: 10; border-bottom: 1px solid #1e3045; }
+    .header-band {
+      height: 4px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold) 0px, var(--gold) 12px,
+        transparent 12px, transparent 14px,
+        var(--blood) 14px, var(--blood) 26px,
+        transparent 26px, transparent 28px
+      );
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 20px 30px;
+    }
+    .site-logo {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .site-logo:hover { opacity: 1; }
+    nav { display: flex; gap: 6px; }
+    nav a {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      color: var(--mist);
+      text-decoration: none;
+      padding: 7px 16px;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+    nav a:hover, nav a.active { color: var(--gold-light); border-color: #284a66; }
+
+    /* ── PAGE TITLE ── */
+    .page-title-block {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 70px 30px 50px;
+      display: flex;
+      align-items: flex-end;
+      gap: 30px;
+      animation: fade-up 0.7s ease both;
+    }
+    .page-title-block h1 {
+      font-family: 'IM Fell English SC', serif;
+      font-size: clamp(52px, 10vw, 96px);
+      font-weight: 400;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px #1e3550;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+    .page-title-meta { padding-bottom: 10px; }
+    .page-title-meta p {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .page-title-meta h2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--snow);
+      letter-spacing: 0.1em;
+    }
+    .page-title-rule { max-width: 760px; margin: 0 auto; padding: 0 30px; }
+    .page-title-rule hr { border: none; height: 1px; background: linear-gradient(90deg, var(--gold-dim), transparent); }
+
+    /* ── MAIN ── */
+    main { position: relative; z-index: 1; flex: 1; }
+
+    .journey-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 30px 100px;
+      animation: fade-up 0.7s 0.2s ease both;
+    }
+
+    /* ── INTRO ── */
+    .journey-intro { margin-bottom: 56px; }
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+    .meta-date {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+    }
+    .meta-place {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: #284a66;
+    }
+    .journey-intro p {
+      font-size: 14px;
+      line-height: 2.4;
+      color: #7a9db8;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .section-header h2 {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .section-header-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold-dim), transparent);
+    }
+    .section-header-count {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 11px;
+      color: #284a66;
+    }
+
+    /* ── PHOTO LIST ── */
+    .photo-list { display: flex; flex-direction: column; gap: 56px; }
+
+    .photo-entry {}
+
+    /* image wrapper — clickable */
+    .photo-img-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #162030;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    .photo-img-wrap img {
+      width: 100%;
+      display: block;
+      filter: sepia(10%) contrast(1.04) brightness(0.95);
+      transition: transform 0.6s ease, filter 0.5s ease;
+    }
+    .photo-img-wrap:hover img {
+      transform: scale(1.02);
+      filter: sepia(4%) contrast(1.07) brightness(1.0);
+    }
+
+    /* corner mark */
+    .photo-corner {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 16px;
+      height: 16px;
+      border-top: 1px solid var(--gold-dim);
+      border-left: 1px solid var(--gold-dim);
+      opacity: 0.4;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .photo-img-wrap:hover .photo-corner { opacity: 0.9; }
+
+    /* caption row */
+    .photo-caption-row {
+      display: flex;
+      gap: 20px;
+      align-items: baseline;
+    }
+    .photo-num {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .photo-caption {
+      font-size: 14px;
+      line-height: 2;
+      color: #7a9db8;
+    }
+
+    /* placeholder */
+    .photo-placeholder {
+      width: 100%;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .photo-placeholder svg { opacity: 0.12; }
+    .photo-placeholder span {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: var(--mist);
+      opacity: 0.4;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 35, 0.96);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 30px;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 900px;
+      max-height: 90vh;
+      width: 100%;
+    }
+    .lightbox-inner img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      display: block;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -36px;
+      right: 0;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      color: var(--mist);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .lightbox-close:hover { color: var(--gold-light); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid #284a66;
+      color: var(--mist);
+      font-family: 'IM Fell English SC', serif;
+      font-size: 18px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .lightbox-nav:hover { border-color: var(--gold-dim); color: var(--gold-light); }
+    .lightbox-nav.prev { left: -50px; }
+    .lightbox-nav.next { right: -50px; }
+    .lightbox-counter {
+      margin-top: 10px;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: #284a66;
+      text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    footer { position: relative; z-index: 1; padding: 30px; border-top: 1px solid #1e3045; text-align: center; }
+    .footer-mark {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      color: #284a66;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .footer-copy { font-size: 11px; color: #1e3550; }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner { padding: 16px 20px; }
+      .page-title-block { padding: 50px 20px 30px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .journey-wrap { padding: 40px 20px 80px; }
+      .lightbox-nav.prev { left: -8px; }
+      .lightbox-nav.next { right: -8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">Golden Kamuy Fan Log</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-title-block">
+    <h1>Journey</h1>
+    <div class="page-title-meta">
+      <p>聖地巡礼</p>
+      <h2>函館</h2>
+    </div>
+  </div>
+  <div class="page-title-rule"><hr></div>
+
+  <main>
+    <div class="journey-wrap">
+
+      <div class="journey-intro">
+        <div class="meta-row">
+          <span class="meta-date">2026</span>
+          <span class="meta-place">Hakodate, Hokkaido</span>
+        </div>
+        <p>ゴールデンカムイの舞台になった函館へ。作中で見たあの場所が本当にあるんだと思うと、なんか不思議な感じがした。</p>
+      </div>
+
+      <div class="section-header">
+        <h2>Photos</h2>
+        <div class="section-header-line"></div>
+        <span class="section-header-count">11 photos</span>
+      </div>
+
+      <div class="photo-list">
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(0)">
+            <img src="photo1.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo1.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">01</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(1)">
+            <img src="photo2.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo2.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">02</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(2)">
+            <img src="photo3.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo3.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">03</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(3)">
+            <img src="photo4.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo4.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">04</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(4)">
+            <img src="photo5.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo5.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">05</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(5)">
+            <img src="photo6.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo6.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">06</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(6)">
+            <img src="photo7.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo7.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">07</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(7)">
+            <img src="photo8.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo8.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">08</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(8)">
+            <img src="photo9.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo9.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">09</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(9)">
+            <img src="photo10.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo10.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">10</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+        <div class="photo-entry">
+          <div class="photo-img-wrap" onclick="openLightbox(10)">
+            <img src="photo11.jpg" alt="" onerror="this.parentElement.innerHTML=ph('photo11.jpg')">
+            <div class="photo-corner"></div>
+          </div>
+          <div class="photo-caption-row">
+            <span class="photo-num">11</span>
+            <p class="photo-caption">ここにコメントを書く。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()">Close ✕</button>
+      <button class="lightbox-nav prev" onclick="navigate(-1)">‹</button>
+      <button class="lightbox-nav next" onclick="navigate(1)">›</button>
+      <img id="lightbox-img" src="" alt="">
+      <p class="lightbox-counter" id="lightbox-counter"></p>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-mark">Golden Kamuy Fan Log</span>
+    <p class="footer-copy">© Fan Log — 二次創作・非公式サイト</p>
+  </footer>
+
+  <script>
+    const total = 11;
+    let current = 0;
+
+    function ph(name) {
+      return `<div class="photo-placeholder"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="3" y="3" width="34" height="34" stroke="#c9a227" stroke-width="0.8"/><line x1="3" y1="3" x2="37" y2="37" stroke="#284a66" stroke-width="0.5"/><line x1="37" y1="3" x2="3" y2="37" stroke="#284a66" stroke-width="0.5"/></svg><span>${name}</span></div>`;
+    }
+
+    function openLightbox(index) {
+      current = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightbox() {
+      const num = current + 1;
+      document.getElementById('lightbox-img').src = `photo${num}.jpg`;
+      document.getElementById('lightbox-counter').textContent =
+        String(num).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+    }
+
+    function navigate(dir) {
+      current = (current + dir + total) % total;
+      updateLightbox();
+    }
+
+    function closeLightbox(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') navigate(1);
+      if (e.key === 'ArrowLeft') navigate(-1);
+    });
+  </script>
+
+</body>
+</html>
