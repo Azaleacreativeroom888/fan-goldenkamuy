@@ -40,11 +40,7 @@
     }
 
     /* ── HEADER ── */
-    .site-header {
-      position: relative;
-      z-index: 10;
-      border-bottom: 1px solid #1e3045;
-    }
+    .site-header { position: relative; z-index: 10; border-bottom: 1px solid #1e3045; }
     .header-band {
       height: 4px;
       background: repeating-linear-gradient(
@@ -84,23 +80,11 @@
       border: 1px solid transparent;
       transition: all 0.3s;
     }
-    nav a:hover, nav a.active {
-      color: var(--gold-light);
-      border-color: #284a66;
-    }
+    nav a:hover, nav a.active { color: var(--gold-light); border-color: #284a66; }
 
     /* ── FEED ── */
-    main {
-      position: relative;
-      z-index: 1;
-      flex: 1;
-    }
-
-    .feed {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 32px 24px 80px;
-    }
+    main { position: relative; z-index: 1; flex: 1; }
+    .feed { max-width: 640px; margin: 0 auto; padding: 32px 24px 80px; }
 
     /* ── POST ── */
     .post {
@@ -111,7 +95,6 @@
     }
     .post:last-child { border-bottom: none; }
 
-    /* date stamp — left column */
     .post-date {
       flex-shrink: 0;
       width: 52px;
@@ -124,7 +107,6 @@
       text-align: right;
     }
 
-    /* thin gold rule between date and body */
     .post-divider {
       flex-shrink: 0;
       width: 1px;
@@ -133,11 +115,7 @@
       min-height: 100%;
     }
 
-    /* right column */
-    .post-body {
-      flex: 1;
-      min-width: 0;
-    }
+    .post-body { flex: 1; min-width: 0; }
 
     .post-body p {
       font-size: 14px;
@@ -146,7 +124,6 @@
       word-break: break-word;
     }
 
-    /* optional title */
     .post-body .post-title {
       font-family: 'Shippori Mincho', serif;
       font-size: 15px;
@@ -156,7 +133,6 @@
       line-height: 1.6;
     }
 
-    /* optional tag */
     .post-tag {
       display: inline-block;
       margin-top: 10px;
@@ -168,14 +144,133 @@
       padding: 2px 8px;
     }
 
-    /* ── FOOTER ── */
-    footer {
+    /* ── POST PHOTOS ── */
+    .post-photos {
+      margin-top: 12px;
+      display: grid;
+      gap: 3px;
+    }
+    /* 1枚 */
+    .post-photos.count-1 { grid-template-columns: 1fr; }
+    /* 2枚 */
+    .post-photos.count-2 { grid-template-columns: 1fr 1fr; }
+    /* 3枚以上 */
+    .post-photos.count-3,
+    .post-photos.count-4 { grid-template-columns: 1fr 1fr; }
+
+    .post-photo {
       position: relative;
+      overflow: hidden;
+      background: #162030;
+      cursor: pointer;
+    }
+    /* 1枚のときは縦長にしない */
+    .post-photos.count-1 .post-photo { aspect-ratio: 4 / 3; }
+    .post-photos.count-2 .post-photo,
+    .post-photos.count-3 .post-photo,
+    .post-photos.count-4 .post-photo { aspect-ratio: 1 / 1; }
+
+    /* 3枚のとき1枚目を横長に */
+    .post-photos.count-3 .post-photo:first-child {
+      grid-column: span 2;
+      aspect-ratio: 2 / 1;
+    }
+
+    .post-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(10%) contrast(1.04) brightness(0.95);
+      transition: transform 0.5s ease, filter 0.4s ease;
+    }
+    .post-photo:hover img {
+      transform: scale(1.03);
+      filter: sepia(4%) contrast(1.07) brightness(1.0);
+    }
+
+    /* corner mark */
+    .post-photo::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 6px;
+      width: 12px; height: 12px;
+      border-top: 1px solid var(--gold-dim);
+      border-left: 1px solid var(--gold-dim);
+      opacity: 0.35;
       z-index: 1;
-      padding: 24px;
-      border-top: 1px solid #1e3045;
+      transition: opacity 0.3s;
+    }
+    .post-photo:hover::before { opacity: 0.8; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 35, 0.96);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 30px;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 860px;
+      max-height: 90vh;
+      width: 100%;
+    }
+    .lightbox-inner img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      display: block;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -36px; right: 0;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      color: var(--mist);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .lightbox-close:hover { color: var(--gold-light); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: none;
+      border: 1px solid #284a66;
+      color: var(--mist);
+      font-size: 18px;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .lightbox-nav:hover { border-color: var(--gold-dim); color: var(--gold-light); }
+    .lightbox-nav.prev { left: -50px; }
+    .lightbox-nav.next { right: -50px; }
+    .lightbox-counter {
+      margin-top: 10px;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: #284a66;
       text-align: center;
     }
+
+    /* ── FOOTER ── */
+    footer { position: relative; z-index: 1; padding: 24px; border-top: 1px solid #1e3045; text-align: center; }
     .footer-mark {
       font-family: 'IM Fell English SC', serif;
       font-size: 9px;
@@ -189,6 +284,8 @@
     @media (max-width: 480px) {
       .post-date { width: 40px; font-size: 9px; }
       .feed { padding: 24px 16px 60px; }
+      .lightbox-nav.prev { left: -8px; }
+      .lightbox-nav.next { right: -8px; }
     }
   </style>
 </head>
@@ -210,11 +307,23 @@
   <main>
     <div class="feed">
 
+      <!-- 写真あり記事のテンプレート
+           写真の枚数に合わせて count-1 / count-2 / count-3 / count-4 を使い分ける
+           src="ここに画像ファイル名" に差し替えるだけ -->
       <div class="post">
         <div class="post-date">2026<br>08.06</div>
         <div class="post-divider"></div>
         <div class="post-body">
           <p>函館旅行を思い出しながらコメント書くの楽しかった。</p>
+          <!-- 写真グリッド（2枚の例） -->
+          <div class="post-photos count-2" id="photos-0806">
+            <div class="post-photo" onclick="openLightbox('photos-0806', 0)">
+              <img src="blog-0806-1.jpg" alt="" onerror="this.onerror=null;this.style.display='none'">
+            </div>
+            <div class="post-photo" onclick="openLightbox('photos-0806', 1)">
+              <img src="blog-0806-2.jpg" alt="" onerror="this.onerror=null;this.style.display='none'">
+            </div>
+          </div>
         </div>
       </div>
 
@@ -222,11 +331,7 @@
         <div class="post-date">2026<br>07.10</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>やっぱゴールデンカムイで一番ヤバいキャラと言えば、姉畑支遁だよね。
-          Pixivの俳優のところに「???」って出てきたんだけど、たぶん実写で姉畑回はないからね。
-          でもちょこっと実写での脱獄のパートで出てきたんだよね。
-          誰だったんだろう。
-          実写で姉畑回あったら、もう漫画の実写の悪口とか一生言えないなって思う。</p>
+          <p>やっぱゴールデンカムイで一番ヤバいキャラと言えば、姉畑支遁だよね。Pixivの俳優のところに「???」って出てきたんだけど、たぶん実写で姉畑回はないからね。でもちょこっと実写での脱獄のパートで出てきたんだよね。誰だったんだろう。実写で姉畑回あったら、もう漫画の実写の悪口とか一生言えないなって思う。</p>
         </div>
       </div>
 
@@ -234,9 +339,7 @@
         <div class="post-date">2026<br>06.28</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>にしんそばってなんであんなに美味しそうなんだろう。
-          あと、子持ち昆布の揚げ物も美味しそう。
-          ゴールデンカムイの食堂とかできてくれないかな。</p>
+          <p>にしんそばってなんであんなに美味しそうなんだろう。あと、子持ち昆布の揚げ物も美味しそう。ゴールデンカムイの食堂とかできてくれないかな。</p>
         </div>
       </div>
 
@@ -244,12 +347,10 @@
         <div class="post-date">2026<br>06.25</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>個人的に樺太編が一番作画が神がかってる。
-          鯉登少尉が好きだからかもしれないけど、樺太編が一番好きなんだよね。
-          白い熊を捕まえようとしたあたりも結構好き。</p>
+          <p>個人的に樺太編が一番作画が神がかってる。鯉登少尉が好きだからかもしれないけど、樺太編が一番好きなんだよね。白い熊を捕まえようとしたあたりも結構好き。</p>
         </div>
       </div>
-      
+
       <div class="post">
         <div class="post-date">2026<br>06.24</div>
         <div class="post-divider"></div>
@@ -262,9 +363,7 @@
         <div class="post-date">2026<br>06.14</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>二瓶の死に方はめっちゃ綺麗だった。
-            二瓶をカッコいいと思わない人っていない気がする。
-            ここで谷垣が杉本陣営になるから、ある意味必要な死だったのかもしれない。</p>
+          <p>二瓶の死に方はめっちゃ綺麗だった。二瓶をカッコいいと思わない人っていない気がする。ここで谷垣が杉本陣営になるから、ある意味必要な死だったのかもしれない。</p>
         </div>
       </div>
 
@@ -272,9 +371,7 @@
         <div class="post-date">2026<br>06.14</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>杉本って躊躇いがないから好きなんだよ。
-          主人公っぽくて信念があるけど、人殺しではあるんだよね。
-          ある意味、杉本って本来の動物の姿の人間なのかもしれない。</p>
+          <p>杉本って躊躇いがないから好きなんだよ。主人公っぽくて信念があるけど、人殺しではあるんだよね。ある意味、杉本って本来の動物の姿の人間なのかもしれない。</p>
         </div>
       </div>
 
@@ -282,10 +379,7 @@
         <div class="post-date">2026<br>06.13</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>もしただ鶴見中尉の勢力が「北海道を手に入れる」ことでなければ
-          杉本は協力したかもしれないなと思う。
-          でもやっぱりそのセリフは、北海道を手中にしたいってことだよね。
-          それはアシリパさんがやりたいことじゃない。ってことだったんだろうな。</p>
+          <p>もしただ鶴見中尉の勢力が「北海道を手に入れる」ことでなければ杉本は協力したかもしれないなと思う。でもやっぱりそのセリフは、北海道を手中にしたいってことだよね。それはアシリパさんがやりたいことじゃない。ってことだったんだろうな。</p>
         </div>
       </div>
 
@@ -293,10 +387,7 @@
         <div class="post-date">2026<br>06.11</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>牛山って典型的な"男に好かれる男"だと思う。男社会の男。
-          たぶん女性で牛山好きな人ってあんまりいない気がする（笑）
-          牛山みたいなキャラっていいよね。意見が二分化するキャラって。
-          キャラに関して議論が起こるのってすごくいい。</p>
+          <p>牛山って典型的な"男に好かれる男"だと思う。男社会の男。たぶん女性で牛山好きな人ってあんまりいない気がする（笑）牛山みたいなキャラっていいよね。意見が二分化するキャラって。キャラに関して議論が起こるのってすごくいい。</p>
         </div>
       </div>
 
@@ -304,10 +395,7 @@
         <div class="post-date">2026<br>06.11</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>「エカシオトンプイ（祖父の尻の穴）」って名前つけるのまじで面白い。
-            こういう病魔が嫌うような名前つけるのは本土の日本人にも同じ文化があったらしい。
-            「卑弥呼」と「倭国」もそうなんじゃないかって説もあるらしくて。実際のところは分からないけど。
-            私ならなにがいいかな……お爺ちゃん好きだったから私も「祖父の臭い息」とかがいいな。</p>
+          <p>「エカシオトンプイ（祖父の尻の穴）」って名前つけるのまじで面白い。こういう病魔が嫌うような名前つけるのは本土の日本人にも同じ文化があったらしい。「卑弥呼」と「倭国」もそうなんじゃないかって説もあるらしくて。実際のところは分からないけど。私ならなにがいいかな……お爺ちゃん好きだったから私も「祖父の臭い息」とかがいいな。</p>
         </div>
       </div>
 
@@ -315,8 +403,7 @@
         <div class="post-date">2026<br>06.09</div>
         <div class="post-divider"></div>
         <div class="post-body">
-          <p>「ヒグマは巣穴に入った人間を殺さない」って本当なのかな？
-            それを実行したいとは思わないけどおとぎ話としては面白いかな。</p>
+          <p>「ヒグマは巣穴に入った人間を殺さない」って本当なのかな？それを実行したいとは思わないけどおとぎ話としては面白いかな。</p>
         </div>
       </div>
 
@@ -341,10 +428,65 @@
     </div>
   </main>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()">Close ✕</button>
+      <button class="lightbox-nav prev" onclick="navigate(-1)">‹</button>
+      <button class="lightbox-nav next" onclick="navigate(1)">›</button>
+      <img id="lightbox-img" src="" alt="">
+      <p class="lightbox-counter" id="lightbox-counter"></p>
+    </div>
+  </div>
+
   <footer>
     <span class="footer-mark">Golden Kamuy Fan Log</span>
     <p class="footer-copy">© Fan Log — 二次創作・非公式サイト</p>
   </footer>
+
+  <script>
+    let currentSrcs = [];
+    let currentIdx = 0;
+
+    function openLightbox(gridId, idx) {
+      const grid = document.getElementById(gridId);
+      currentSrcs = Array.from(grid.querySelectorAll('img')).map(i => i.src);
+      currentIdx = idx;
+      update();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function update() {
+      document.getElementById('lightbox-img').src = currentSrcs[currentIdx];
+      const nav = document.querySelector('.lightbox-nav.prev').parentElement;
+      document.getElementById('lightbox-counter').textContent =
+        currentSrcs.length > 1
+          ? (currentIdx + 1) + ' / ' + currentSrcs.length
+          : '';
+      // hide nav if only 1 photo
+      document.querySelectorAll('.lightbox-nav').forEach(b =>
+        b.style.display = currentSrcs.length > 1 ? '' : 'none'
+      );
+    }
+
+    function navigate(dir) {
+      currentIdx = (currentIdx + dir + currentSrcs.length) % currentSrcs.length;
+      update();
+    }
+
+    function closeLightbox(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') navigate(1);
+      if (e.key === 'ArrowLeft') navigate(-1);
+    });
+  </script>
 
 </body>
 </html>
